@@ -8,13 +8,13 @@ Downloader for campaigns.
 
 Clone repo to your machine and then run:
 
-```
+```js
 npm install
 ```
 
 ### Download a campaign
 
-```
+```js
 const wd = require('./source/client.js');
 
 wd.setAuth('username', 'password', 'env');
