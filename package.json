@@ -1,0 +1,29 @@
+{
+  "name": "ui-webdav",
+  "version": "1.0.0",
+  "description": "Enables you to download campaign files from UI",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/toxicbeaver/ui-webdav.git"
+  },
+  "keywords": [
+    "ui",
+    "webdav"
+  ],
+  "author": "Damian Birkowski",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/toxicbeaver/ui-webdav/issues"
+  },
+  "homepage": "https://github.com/toxicbeaver/ui-webdav",
+  "devDependencies": {
+    "node-fetch": "^1.6.0",
+    "request": "^2.74.0",
+    "request-promise": "^4.1.1",
+    "xml2js": "^0.4.17"
+  }
+}
