@@ -17,9 +17,25 @@ npm install
 ```js
 const wd = require('./source/client.js');
 
-wd.setAuth('auth');
-wd.setCampaign('site from ui', 'campaign name');
-wd.getCampaign();
+wd.getCampaign({}, 'site from ui', 'campaign name');
+```
+
+### Sample task in Gulp
+
+```js
+const wd = require('./source/client.js');
+const gulp = require('gulp');
+let settings = {
+    auth: 'username:password'.
+    host: 'host'
+};
+
+gulp.task('dl', () => {
+    let customer = 'customer',
+        campaign = 'campaign';
+
+    wd.getCampaign(settings, customer, campaign);
+});
 ```
 
 ## Docs
@@ -33,7 +49,7 @@ App has only 1 method:
 ```js
 let settings = {
     auth: 'username:password',
-    host: 'host url'
+    host: 'host'
 } 
 ```
 
