@@ -3,7 +3,7 @@ const rp = require('request-promise');
 const xml2js = require('xml2js');
 const fs = require('fs');
 const fetch = require('node-fetch');
-let auth = {}, campaignSettings;
+let auth, campaignSettings;
 
 function getFullPath() {
     return `http://${auth.host}/webdav/${campaignSettings.site}/Sandbox/1-Debug/${campaignSettings.campaignName}`;
@@ -57,7 +57,7 @@ function getCampaign(auth, path, subFolder) {
         </prop>
         </propfind>`;
     const headers = {
-        "Authorization": "Basic " + (new Buffer(auth.username + ":" + auth.password)).toString('base64'),
+        "Authorization": "Basic " + (new Buffer(auth.auth)).toString('base64'),
         "Content-Length": data.length,
         "Depth": 0,
         "Content-Type": "text/xml",
@@ -88,7 +88,7 @@ function getCampaign(auth, path, subFolder) {
 function getFile(path) {
     return fetch(path, {
             headers: {
-                "Authorization": "Basic " + (new Buffer(`${auth.username}:${auth.password}`)).toString('base64'),
+                "Authorization": "Basic " + (new Buffer(auth.auth)).toString('base64'),
                 "User-Agent": "WebDrive 16.0.4348 DAV"
             }
         })
@@ -138,19 +138,11 @@ function handleResponseError(res) {
 }
 
 module.exports = {
-    setAuth: (username, password, env) => {
-        if(!username || !password) {
-            throw new Error('Please fill out your credentials');
+    setAuth: settings => {
+        if(!settings) {
+            throw new Error('Please pass on credentials');
         } else {
-            auth.username = username;
-            auth.password = password;
-        }
-        if (env === 'eu') {
-            auth.host = 'ui61.maxymiser.com';
-        } else if (env === 'us') {
-            auth.host = 'ui61us.maxymiser.com';
-        } else {
-            throw new Error('Incorrect environment. Use "us" or "eu" as passed parameter.');
+            auth = settings;
         }
     },
     setCampaign: (site, campaignName) => {
