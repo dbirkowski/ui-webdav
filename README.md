@@ -17,30 +17,25 @@ npm install
 ```js
 const wd = require('./source/client.js');
 
-wd.setAuth('username', 'password', 'env');
+wd.setAuth('auth');
 wd.setCampaign('site from ui', 'campaign name');
 wd.getCampaign();
 ```
 
 ## Docs
 
-App has only 3 methods. Here are the methods with params they take:
+App has only 1 method:
 
-### setAuth(username, password, env)
+### getCampaign(settings, site, campaignName)
 
-Sets the credentials to successfully download a campaign.
+* `settings` should contain the following:
 
-* `username` takes a string with username from UI
-* `password` takes a string with password from UI
-* `env` takes a string: `us` or `eu` depending from which you want to download
-
-### setCampaign(site, campaignName)
-
-Sets the necessary things to successfully download a campaign.
+```js
+let settings = {
+    auth: 'username:password',
+    host: 'host url'
+} 
+```
 
 * `site` takes a string with site name form UI
 * `campaignName` takes a string with campaign name form UI
-
-### getCampaign()
-
-Doesn't take any parameter. After `setAuth` and `setCampaign` run it to download the campaign files.

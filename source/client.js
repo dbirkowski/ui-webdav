@@ -32,12 +32,12 @@ function downloadFiles(items, path, subFolder) {
                     throw err;
                 });
         } else if (el.type === 'directory') {
-            getCampaign(auth, [path, el.name].join('/'), el.name);
+            getCampaign([path, el.name].join('/'), el.name);
         }
     });
 }
 
-function getCampaign(auth, path, subFolder) {
+function getCampaign(path, subFolder) {
     const data = `<?xml version='1.0'?>
         <propfind xmlns='DAV:' xmlns:srtns='http://www.southrivertech.com/'>
         <prop>
@@ -138,20 +138,20 @@ function handleResponseError(res) {
 }
 
 module.exports = {
-    setAuth: settings => {
-        if(!settings) {
+    getCampaign: (settings, site, campaignName) => {
+        if (!settings) {
             throw new Error('Please pass on credentials');
         } else {
             auth = settings;
         }
-    },
-    setCampaign: (site, campaignName) => {
-        campaignSettings = {
-            site,
-            campaignName
-        };
-    },
-    getCampaign: () => {
-        getCampaign(auth, getFullPath());
+        if (!site || !campaignName) {
+            throw new Error('Please pass site and/or campaignName');
+        } else {
+            campaignSettings = {
+                site,
+                campaignName
+            };
+        }
+        getCampaign(getFullPath());
     }
 };
